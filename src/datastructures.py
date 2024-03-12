@@ -7,7 +7,7 @@ update this file to implement the following already declared methods:
 - get_member: Should return a member from the self._members list
 """
 from random import randint
-
+ 
 class FamilyStructure:
     def __init__(self, last_name):
         self.last_name = last_name
@@ -28,14 +28,24 @@ class FamilyStructure:
          "age": member["age"],
          "lucky_numbers": list(member["lucky_numbers"])
          }
-         self._members.append(handler_member)
-         return self._members
+         if int(handler_member["age"]) > 0:
+            self._members.append(handler_member)
+            return self._members
+         else: "Age must be more than 0"
 
     
 
     def delete_member(self, id):
         # fill this method and update the return
-        pass
+        def member_borrado(member):
+            return member["id"]!= id
+        member = list(filter(member_borrado,self._members))
+        if member == self._members:
+            return "Member Not Found"
+        else:
+            self._members = member
+            return self._members
+
 
     def get_member(self, id):
         # fill this method and update the return

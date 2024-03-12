@@ -49,6 +49,15 @@ def handle_one_member(member_id):
     member= jackson_family.get_member(member_id)
     return jsonify(member)
 
+@app.route('/members/<int:member_id>', methods=['DELETE'])
+def member_delete(member_id):
+    member= jackson_family.delete_member(member_id)
+    if member == "Member Not Found":
+        return jsonify(member), 400
+    
+    return jsonify(member), 200
+
+
 # this only runs if `$ python src/app.py` is executed
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3000))
